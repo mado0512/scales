@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:root {
+  --scene-bg-color: oklch(0% 0 0 / 0.8);
+
+  --lightness-start: 40%;
+  --chroma: 0.125;
+  --hue: 257;
+  --opacity: 1;
+}
+
+body {
+  margin: 1rem;
+  height: 100vh;
+  background: var(--scene-bg-color);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  gap: 3rem;
+}
+
+article {
+  display: block;
+  color: gray;
+  opacity: 0.5;
+  /* 脱离文档流 — 不占位 */
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 的简写 */
+
+  /* 当背景层 */
+  z-index: 0;
+
+  /* 填满屏幕 + 自适应字号 + 换行 */
+  min-height: 100dvh;
+  font-size: clamp(1rem, 1rem + 1.5vw, 2rem);
+  line-height: 1.7;
+  overflow-wrap: break-word;
+  padding: 2rem;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+#hover-color {
+  color: white;
+  font-size: 5rem;
+  z-index: 1000;
+  background: oklch(0% 0 0 / 1);
+  padding: 2rem 4rem;
+  border-radius: 1rem;
+  transition: background 0.15s ease;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+  text-align: center;
+  min-width: 20rem;
+  min-height: 5rem;
+  display: grid;
+  place-items: center;
+}
+
+#cards {
+  display: flex;
+  height: 40%;
+  justify-content: stretch;
+  align-items: stretch;
+  width: 80%;
+  list-style: none;
+  /* grid-template-columns: repeat(3, 1fr); */
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.card {
+  line-height: 1.5;
+  user-select: none;
+  color: rgba(255, 255, 255, 0);
+  flex: 1;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  display: grid;
+  place-items: end center;
+  scale: 0.5;
+  opacity: 10;
+  margin: -150px;
+  animation: 300ms popIn ease-out forwards;
+  animation-delay: calc((sibling-index() - 1) * 50ms);
+  transition: all 0.15s ease;
+  backdrop-filter: blur(2px);
+  & {
+    --progress: calc((sibling-index() - 1) / (sibling-count() - 1));
+    --background-color: oklch(
+      calc(var(--lightness-start) + var(--progress) * 40%) var(--chroma)
+        var(--hue) / var(--opacity)
+    );
+    background: var(--background-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      cursor: pointer;
+      background: linear-gradient(var(--background-color), transparent);
+      color: white;
+      transform: translateY(-10px);
+    }
+
+    &::before {
+      content: "%";
+      font-size: 5rem;
+    }
+  }
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    scale: 1;
+    margin: 0px;
+  }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="container">
+  <article>
+    <p>
+      Elit sit duis incididunt consequat occaecat et eu labore incididunt ex ut labore amet eiusmod. Magna ipsum sit
+      incididunt aute aliquip. Lorem magna pariatur eu irure ea. Tempor Lorem cillum culpa elit reprehenderit anim. Sint
+      enim nostrud elit irure Lorem veniam nulla ut. Pariatur consectetur in non quis proident proident irure quis esse
+      laborum magna consequat adipisicing aliqua. Proident cillum culpa excepteur enim est magna.
+
+      Exercitation irure ex non voluptate fugiat et labore adipisicing laboris in. Voluptate amet commodo ex veniam
+      pariatur. Sint sint ullamco qui sint et aute commodo et qui cupidatat duis qui qui laborum. Aliquip reprehenderit
+      mollit deserunt cillum aliquip minim excepteur. Non ipsum dolore quis non nulla labore deserunt eu id et do
+      deserunt.
+
+      Tempor est esse qui cupidatat aute ullamco sint ullamco esse. Et sunt laborum velit labore pariatur culpa. Ex ad
+      veniam exercitation duis anim voluptate veniam sunt anim enim adipisicing incididunt. Cupidatat ullamco et
+      occaecat commodo Lorem. Consectetur sit aliquip tempor ad laboris cillum magna laborum adipisicing commodo ullamco
+      Lorem. Ipsum dolor est ut ad laborum exercitation qui.
+
+      Pariatur velit consequat reprehenderit ex commodo. Nisi officia cillum Lorem duis sint officia consectetur dolore
+      aliqua mollit dolore. Officia laboris pariatur velit enim officia. Lorem mollit eiusmod eu aute laborum anim
+      exercitation est id proident amet labore do esse. Et aute esse mollit consequat cillum adipisicing excepteur
+      excepteur.
+
+      Velit culpa reprehenderit nostrud deserunt aliqua culpa dolor est consequat mollit. Aute do aliqua mollit minim
+      excepteur sunt officia qui ullamco veniam id amet sit non. Laboris sit ex laboris pariatur enim amet sint laboris
+      laborum irure Lorem pariatur. Labore mollit nostrud labore id fugiat fugiat Lorem exercitation mollit labore.
+      Minim qui qui sint dolore pariatur exercitation. Deserunt anim eiusmod dolor ea proident commodo nisi exercitation
+      cillum nisi officia officia mollit nisi.
+
+      In tempor irure laborum officia Lorem officia irure sint veniam ipsum deserunt non quis id. Est ipsum ullamco qui
+      Lorem. Duis dolore mollit labore aliquip aliqua. Occaecat adipisicing do anim proident cupidatat ullamco. Et
+      voluptate deserunt quis anim quis consequat irure elit in cupidatat. Pariatur quis ullamco do velit esse deserunt
+      magna mollit aliqua. Nulla nisi consectetur do excepteur et ipsum et.
+
+      Duis esse irure cillum consequat cupidatat non eiusmod esse ut commodo. Amet reprehenderit tempor proident ea sit
+      dolor anim laboris dolore laborum non adipisicing ut. Esse aliqua tempor dolor consectetur officia aliqua sint
+      ipsum consequat commodo deserunt irure elit nisi. Aliqua sit mollit sunt velit velit ullamco et. Qui non cillum
+      voluptate cillum minim et enim id. Et et nostrud nulla mollit sit ex nisi velit cillum laboris esse. Irure cillum
+      est duis cillum occaecat eiusmod exercitation mollit proident quis proident duis.
+
+      Ex adipisicing proident labore voluptate cillum voluptate aute. Ullamco Lorem eiusmod est id et anim amet
+      deserunt. Anim ullamco ex aliqua est cupidatat aliqua est est consequat commodo. Cupidatat mollit sunt elit
+      incididunt aute elit in tempor. Irure ipsum duis consequat officia. Est consequat ex qui voluptate enim excepteur
+      est non excepteur. Incididunt magna nisi nostrud est in nulla occaecat nostrud non.
+
+      Eiusmod dolor ex aliquip adipisicing consectetur consequat nulla quis. Mollit elit deserunt pariatur anim
+      adipisicing quis elit officia. Occaecat labore ea laborum occaecat irure. Nulla incididunt velit eu ullamco qui.
+
+      Voluptate mollit consequat sint labore dolor ea sunt culpa ex magna. Eiusmod tempor exercitation tempor
+      exercitation sit. Occaecat mollit mollit velit ad ut Lorem ullamco. Nostrud mollit aliqua et aliquip commodo et
+      in. Lorem Lorem duis deserunt tempor est nisi. Laboris do nulla fugiat enim.
+    </p>
+  </article>
+  <ol id="cards">
+    <li class="card glass">Card 1</li>
+    <li class="card glass">Card 2</li>
+    <li class="card glass">Card 3</li>
+    <!-- <li class="card glass">Card 4</li>
+    <li class="card glass">Card 5</li>
+    <li class="card glass">Card 6</li>
+    <li class="card glass">Card 7</li>
+    <li class="card glass">Card 8</li> -->
+  </ol>
+  <p id="hover-color">(hover a card)</p>
+</body>
+
+<script>
+  const cards = document.querySelectorAll('.card');
+  const hoverColor = document.getElementById('hover-color');
+
+  function bgSync(el) {
+    const bg = getComputedStyle(el).backgroundColor;
+    hoverColor.textContent = bg;
+    hoverColor.style.background = bg;
+    // 颜色亮度自适应文字颜色
+    const rgb = bg.match(/\d+/g);
+    if (rgb) {
+      const luma = 0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2];
+      hoverColor.style.color = luma > 128 ? '#000' : '#fff';
+    }
+  }
+
+  function bgReset() {
+    hoverColor.textContent = '(hover a card)';
+    hoverColor.style.background = 'oklch(0% 0 0 / 1)';
+    hoverColor.style.color = '#fff';
+  }
+
+  [...cards].forEach(el => {
+    el.addEventListener('mouseenter', () => bgSync(el));
+  });
+
+  document.getElementById('cards').addEventListener('mouseleave', bgReset);
+</script>
+
+</html>
