@@ -1,5 +1,11 @@
 # README
 
+## Demo
+
+![Snapshot 1](image.png)
+
+![Snapshot 2](image-1.png)
+
 ## Credit
 
 This demo is inspired by two videos.
@@ -10,6 +16,10 @@ The glass scale part is inspired by this [video](https://www.bilibili.com/video/
 
 ## Roadmap
 
+- [x] Responsive step along color cheme
+  - [x] Along Lightness
+  - [ ] Along Hue
+  - [ ] Along Chroma
 - [ ] Make stacking hover/unhover animation
 - [ ] Change design of swatch
   - [ ] square of swatch on left
